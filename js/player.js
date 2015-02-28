@@ -114,6 +114,7 @@
         });
 
         fiveSecondsPlayed = false;
+        updateCurTimePosition(0);
 
     }
 
@@ -317,10 +318,13 @@
     }
 
     function updateCurTimePosition (progress) {
-        progress = normalizeScale(progress);
-
-        var duration = videoElem.duration || videoData.duration;
-        controls.progress.timeCurrent.textContent = formatTime(duration * progress);
+        if (progress === 0) {
+            controls.progress.timeCurrent.textContent = formatTime(progress);
+        } else {
+            progress = normalizeScale(progress);
+            var duration = videoElem.duration || videoData.duration;
+            controls.progress.timeCurrent.textContent = formatTime(duration * progress);
+        }
 
         var progressbarWidth = controls.progress.bar.clientWidth;
         var curTimeWidth = controls.progress.timeCurrent.clientWidth;
