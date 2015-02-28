@@ -474,7 +474,7 @@ a:hover {
   font-size: 0.85em;
   color: #ddd;
 }
-@media (max-width: 400px) {
+@media all and (max-width: 400px) {
   .player-info__author {
     display: none;
   }
@@ -804,7 +804,7 @@ a:hover {
   background: #222;
   color: #fff;
 }
-@media (max-width: 400px) {
+@media all and (max-width: 400px) {
   .player-controls__volumebar,
   #watch-on-vk {
     display: none;
