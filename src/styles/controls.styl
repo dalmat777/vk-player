@@ -1,0 +1,234 @@
+$controls_height = 44px
+$progress_track_height = 4px
+
+.player-controls
+    position absolute
+    right 0
+    bottom 0
+    left 0
+    height $controls_height
+    line-height $controls_height
+    background rgba(0, 0, 0, .6)
+    font-size 0.85em
+    transition bottom .33s
+
+    &.-hidden
+        bottom -($controls_height)
+
+    &__item
+        display table-cell
+        vertical-align middle
+        position relative
+        padding 0 10px
+        white-space nowrap
+        cursor pointer
+        transition background .33s, opacity .33s
+
+        &:hover
+            background rgba(0, 0, 0, .4)
+            opacity 0.7
+
+    &__progressbar
+        display table-cell
+        vertical-align middle
+        width 100%
+        padding 0 15px
+
+    &__volumebar
+        display table-cell
+        vertical-align middle
+        width 200px
+        padding 0 15px 0 5px
+
+
+    &__state-pause
+        display none
+
+    .player_playing &__state-pause
+        display block
+
+    .player_playing &__state-play
+        display none
+
+    &__fullscreen-exit
+        display none
+
+    .player_fullscreen &__fullscreen-exit
+        display block
+
+    .player_fullscreen &__fullscreen-enter
+        display none
+
+
+.progress
+    position relative
+    padding (($controls_height - $progress_track_height)/2) 0
+    cursor pointer
+
+    &__time
+        position absolute
+        top 0
+        right 2px
+        left 2px
+        line-height (($controls_height - $progress_track_height)/2)
+        font-size 0.85em
+
+    &__time-current
+        position absolute
+        top 0
+        left 0
+
+    &__time-total
+        position absolute
+        top 0
+        right 0
+        padding-left 10px
+        color #ccc
+
+    &__tip
+        position absolute
+        bottom 32px
+        padding 4px 6px
+        border-radius 3px
+        background rgba(0, 0, 0, .8)
+        line-height 1
+        font-size 0.9em
+        transform translateX(-50%)
+        transition-property bottom, opacity, visibility
+        transition-duration .2s
+
+        &:after
+            content ''
+            position absolute
+            top 100%
+            left 50%
+            margin-left -4px
+            border-top 4px solid rgba(0, 0, 0, .8)
+            border-right 4px solid transparent
+            border-bottom 4px solid transparent
+            border-left 4px solid transparent
+
+        &.-hidden
+            visibility hidden
+            bottom 38px
+            opacity 0
+
+    &__track
+        position relative
+        height $progress_track_height
+        border-radius 2px
+        background rgba(255, 255, 255, .3)
+
+    &__loaded
+        position absolute
+        top 0
+        left 0
+        height $progress_track_height
+        border-radius 2px
+        background rgba(255, 255, 255, .3)
+        transition right .2s
+
+    &__played
+        position absolute
+        top 0
+        left 0
+        height $progress_track_height
+        border-radius 2px
+        background #fff
+
+    &__handle
+        position absolute
+        top 50%
+        right 0
+        width 8px
+        height 8px
+        margin-right -4px
+        margin-top -4px
+        border-radius 50%
+        background #fff
+        opacity 0
+        visibility hidden
+        transition visibility .33s, opacity .33s
+
+    &:hover &__handle
+        opacity 1
+        visibility visible
+
+
+.volume
+    width 50px
+    padding (($controls_height - $progress_track_height)/2) 0
+    cursor pointer
+
+    &__track
+        position relative
+        height $progress_track_height
+        border-radius 2px
+        background rgba(255, 255, 255, .3)
+
+    &__filled
+        position absolute
+        top 0
+        left 0
+        height $progress_track_height
+        border-radius 2px
+        background #fff
+        // transition width .2s
+
+    &__handle
+        position absolute
+        top 50%
+        right 0
+        width 8px
+        height 8px
+        margin-right -4px
+        margin-top -4px
+        border-radius 50%
+        background #fff
+        opacity 0
+        transition opacity .33s
+
+    &:hover &__handle
+        opacity 1
+
+
+.quality
+
+    &__caret-icon
+        display inline-block
+        vertical-align middle
+        border-top 4px solid #fff
+        border-right 4px solid transparent
+        border-bottom 0
+        border-left 4px solid transparent
+        margin-left 5px
+
+    &__list
+        position absolute
+        bottom 100%
+        width 100%
+        list-style none
+        margin 0 0 0 -10px
+        padding 0
+        overflow hidden
+        border-radius 3px 3px 0 0
+        background #000
+        transition visibility .33s, opacity .33s
+    
+        &.-hidden
+            visibility hidden
+            opacity 0
+
+    &__item
+        padding 0 15px 0 10px
+        line-height 30px
+        color #c0c0c0
+
+        &:hover
+            background #222
+            color #fff
+
+@media (max-width 400px)
+    .player-controls__volumebar
+    #watch-on-vk
+        display none

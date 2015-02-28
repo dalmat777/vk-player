@@ -1,0 +1,129 @@
+extends _layout
+
+
+block title
+    | VK video player
+
+
+block content
+    
+    #player.player
+        
+        .player-video-container#video-container
+            video#video.player-video(preload="none")
+
+            .player-big-play-button#big-play-button
+
+            .player-loader.-hidden#loader
+
+        .player-suggestions.suggestions.-hidden#suggestions
+            .suggestions__list#suggestions-list
+                a.suggestions__item(href="//vk.com/video-74404187_170755236", data-video="-74404187_170755236", style="background-image: url(https://pp.vk.me/c543202/u1320506/video/l_ac082a4e.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Как звуком рисовать на осциллографе танцующие грибы
+                        .suggestions__item-author Образовач
+                        .suggestions__item-duration 3:22
+                a.suggestions__item(href="//vk.com/video1_167497161", data-video="1_167497161", style="background-image: url(https://pp.vk.me/c528406/u65199276/video/l_ee0376bb.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Страх
+                        .suggestions__item-author Pavel Durov
+                        .suggestions__item-duration 2:07
+                a.suggestions__item(href="//vk.com/video146726324_165844206", data-video="146726324_165844206", style="background-image: url(https://pp.vk.me/c510411/u254747/video/l_cfb5e158.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Big Little World HD
+                        .suggestions__item-author Katya Sorochenkova
+                        .suggestions__item-duration 7:34
+                a.suggestions__item(href="//vk.com/video7547629_170731917", data-video="7547629_170731917", style="background-image: url(https://pp.vk.me/c540309/u245032020/video/l_6eeacd11.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Пятый элемент / The Fifth Element 1997
+                        .suggestions__item-author Polina Leskova
+                        .suggestions__item-duration 2:05:53
+                a.suggestions__item(href="//vk.com/video-57036769_169689053", data-video="-57036769_169689053", style="background-image: url(https://pp.vk.me/c534213/u125884936/video/l_27e8f787.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Amazing Nature full HD 1080p
+                        .suggestions__item-author Anna Sidelnikova
+                        .suggestions__item-duration 4:57
+                a.suggestions__item(href="//vk.com/video1_164841344", data-video="1_164841344", style="background-image: url(https://pp.vk.me/c12761/u5705167/video/l_00c6be47.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title This is SPARTA
+                        .suggestions__item-author Pavel Durov
+                        .suggestions__item-duration 0:16
+                a.suggestions__item(href="//vk.com/video-33322342_167639671", data-video="-33322342_167639671", style="background-image: url(https://pp.vk.me/c12681/u3179973/video/l_ea96b111.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Рождественская история Микки / Mickey's Christmas Carol 1983
+                        .suggestions__item-author Фильмы на английском языке с субтитрами
+                        .suggestions__item-duration 25:42
+                a.suggestions__item(href="//vk.com/video-19089903_150046069", data-video="-19089903_150046069", style="background-image: url(https://pp.vk.me/c12528/u72204007/video/l_6dc16c48.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Живое море / The Living Sea 
+                        .suggestions__item-author Видео библиотека Гелиос
+                        .suggestions__item-duration 39:33
+                a.suggestions__item(href="//vk.com/video156097_166279533", data-video="156097_166279533", style="background-image: url(https://pp.vk.me/c13295/u62114524/video/l_44651462.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Night Motion Timelapse: Outer Banks
+                        .suggestions__item-author Alex Undead
+                        .suggestions__item-duration 3:58
+                a.suggestions__item(href="//vk.com/video108417616_160997516", data-video="108417616_160997516", style="background-image: url(https://pp.vk.me/c13454/u108417616/video/l_f0b6d836.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Planet Earth seen from space (Full HD 1080p) Original
+                        .suggestions__item-author Magamed Agakishiev
+                        .suggestions__item-duration 20:33
+                a.suggestions__item(href="//vk.com/video-53113228_170669934", data-video="-53113228_170669934", style="background-image: url(https://pp.vk.me/c634105/u193253122/video/l_8684eefb.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title Nature  Beauty   in 4K Resolution(ULTRA  HD)
+                        .suggestions__item-author Le Manoir
+                        .suggestions__item-duration 2:27
+                a.suggestions__item(href="//vk.com/video-55754229_169772792", data-video="-55754229_169772792", style="background-image: url(https://pp.vk.me/c534108/u133701443/video/l_a5685342.jpg);")
+                    .suggestions__item-data
+                        .suggestions__item-title The Waters of Greenstone from Nathan Kaso
+                        .suggestions__item-author COME TRUE
+                        .suggestions__item-duration 5:46
+
+        .player-error.-hidden#error
+            .player-error__text#error-text
+
+        .player-info#info
+            a.player-info__author#info-author(target="_blank")
+            a.player-info__title#info-title(target="_blank")
+
+        .player-controls.player-controls_visible#controls
+
+            .player-controls__item#state
+                .player-controls__state-play(title="Play")
+                    i.icon-controls.icon-controls-play
+                .player-controls__state-pause(title="Pause")
+                    i.icon-controls.icon-controls-pause
+
+            .player-controls__progressbar
+                .progress#progress
+                    .progress__time
+                        span.progress__time-current#progress-time-current
+                        span.progress__time-total#progress-time-total
+                    .progress__track
+                        .progress__loaded#progress-loaded
+                        .progress__played#progress-played
+                            .progress__handle
+                    .progress__tip.-hidden#progress-tip 0:00
+
+            .player-controls__item#mute(title="Mute/Unmute")
+                i.icon-controls.icon-controls-volume-high
+
+            .player-controls__volumebar
+                .volume#volume
+                    .volume__track
+                        .volume__filled#volume-filled
+                            .volume__handle
+
+            .player-controls__item#fullscreen
+                .player-controls__fullscreen-enter(title="Enter fullscreen")
+                    i.icon-controls.icon-controls-maximize
+                .player-controls__fullscreen-exit(title="Exit fullscreen")
+                    i.icon-controls.icon-controls-minimize
+
+            .player-controls__item#quality
+                span#quality-value(title="Change quality")
+                i.quality__caret-icon
+                ul.quality__list.-hidden#quality-select
+
+            .player-controls__item#watch-on-vk(title="Watch on VK")
+                i.icon-controls.icon-controls-vk

@@ -1,0 +1,73 @@
+doctype
+style.
+    main {
+        width: 700px;
+        margin: 0 auto;
+        padding: 100px 0;
+    }
+    .video {
+        display: block;
+        border: 0;
+        width: 100%;
+    }
+    .video-1 {
+        height: 465px;
+        margin-bottom: 70px;
+    }
+    .video-2 {
+        float: left;
+        width: 340px;
+        height: 192px;
+        margin-bottom: 70px;
+    }
+    .video-3 {
+        float: right;
+        width: 340px;
+        height: 192px;
+        margin-bottom: 70px;
+    }
+    .video-4 {
+        height: 394px;
+    }
+
+script.
+    window.addEventListener('load', function () {
+        var token = localStorage.getItem('vk-video-token');
+        var match;
+    
+        if (!token) {
+            if (match = location.hash.match(/access_token=([0-9a-f]+)/)) {
+                token = match[1];
+                localStorage.setItem('vk-video-token', token);
+                location.hash = '';
+            } else {
+                location.href = 'https://oauth.vk.com/authorize?client_id=2407470&scope=video,offline&redirect_uri=https://gavr-pavel.github.io/vk-player/example.html&response_type=token';
+                return;
+            }
+        }
+    
+        var videos = [
+            {owner_id: 19220683, id: 157646384},
+            {owner_id: 19220683, id: 150086961},
+            {owner_id: 19220683, id: 156053861},
+            {owner_id: -33322342, id: 165040157}
+        ];
+    
+        var container = document.createElement('main');
+    
+        videos.forEach(function (video, i) {
+            var iframe = document.createElement('iframe');
+            iframe.src = 'player.html?owner_id=OWNER_ID&id=VIDEO_ID&token=TOKEN'
+                            .replace('OWNER_ID', video.owner_id)
+                            .replace('VIDEO_ID', video.id)
+                            .replace('TOKEN', token);
+    
+                iframe.height = video.height;
+            iframe.setAttribute('allowfullscreen', true);
+            iframe.className = 'video video-' + (i+1);
+            container.appendChild(iframe);
+        });
+    
+        document.body.appendChild(container);
+    
+    });
