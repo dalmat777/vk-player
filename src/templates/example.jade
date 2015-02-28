@@ -1,4 +1,5 @@
 doctype
+// Github repo: github.com/gavr-pavel/vk-player
 style.
     main {
         width: 700px;
@@ -62,7 +63,6 @@ script.
                             .replace('VIDEO_ID', video.id)
                             .replace('TOKEN', token);
     
-                iframe.height = video.height;
             iframe.setAttribute('allowfullscreen', true);
             iframe.className = 'video video-' + (i+1);
             container.appendChild(iframe);
