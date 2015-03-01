@@ -204,6 +204,17 @@
             window.open(url, '_blank');
         });
 
+        window.addEventListener('resize', function () {
+            if (launched) {
+                updateCurTimePosition(videoElem.currentTime / videoElem.duration);
+            }
+        });
+
+        doc.addEventListener('fullscreenchange', fullscreenChangeHandler);
+        doc.addEventListener('webkitfullscreenchange', fullscreenChangeHandler);
+        doc.addEventListener('mozfullscreenchange', fullscreenChangeHandler);
+        doc.addEventListener('MSFullscreenChange', fullscreenChangeHandler);
+
         // media events
 
         videoElem.addEventListener('progress', bufferingProgressHandler);
@@ -236,17 +247,6 @@
         });
 
         videoElem.addEventListener('ended', showSuggestions);
-
-        doc.addEventListener('fullscreenchange', fullscreenChangeHandler);
-        doc.addEventListener('webkitfullscreenchange', fullscreenChangeHandler);
-        doc.addEventListener('mozfullscreenchange', fullscreenChangeHandler);
-        doc.addEventListener('MSFullscreenChange', fullscreenChangeHandler);
-
-        window.addEventListener('resize', function () {
-            if (launched) {
-                updateCurTimePosition(videoElem.currentTime / videoElem.duration);
-            }
-        });
 
     }
 
@@ -460,7 +460,6 @@
     }
 
     function progressMouseDownHandler (evt) {
-        evt.preventDefault();
         seeking = true;
         var progressbar = controls.progress.bar;
         var progress = (evt.pageX - progressbar.offsetLeft) / progressbar.clientWidth;
@@ -486,7 +485,6 @@
     }
 
     function volumeMouseHandler (evt) {
-        evt.preventDefault();
         var volumebar = evt.currentTarget;
         var volumebarWidth = volumebar.clientWidth;
         videoElem.muted = false;
