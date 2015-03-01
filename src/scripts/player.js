@@ -206,7 +206,8 @@
 
         window.addEventListener('resize', function () {
             if (launched) {
-                updateCurTimePosition(videoElem.currentTime / videoElem.duration);
+                var duration = videoElem.duration || videoData.duration;
+                updateCurTimePosition(videoElem.currentTime / duration);
             }
         });
 
@@ -238,11 +239,11 @@
             clearTimeout(hideControlsTimer);
         });
 
-        videoElem.addEventListener('waiting', function () {
+        videoElem.addEventListener('seeking', function () {
             loaderElem.classList.remove('-hidden');
         });
 
-        videoElem.addEventListener('canplay', function () {
+        videoElem.addEventListener('seeked', function () {
             loaderElem.classList.add('-hidden');
         });
 
@@ -265,9 +266,11 @@
             videoElem.addEventListener('loadedmetadata', function loadedHandler () { // necessary for working in IE
                 videoElem.currentTime = progress * videoElem.duration;
                 videoElem.removeEventListener('loadedmetadata', loadedHandler);
+                loaderElem.classList.add('-hidden');
             });
             videoElem.load();
             videoElem.play();
+            loaderElem.classList.remove('-hidden');
         } else {
             videoElem.currentTime = videoElem.duration * progress;
         }
