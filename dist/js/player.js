@@ -260,8 +260,12 @@
 
     function seekTo (progress) {
         progress = normalizeScale(progress);
-        if (!launched || !videoElem.readyState) {
-            videoElem.src = videoElem.src.split('#')[0] + '#t=' + videoData.duration * progress;
+        if (!videoElem.readyState) {
+            videoElem.src = videoElem.src.split('#')[0] + '#t=' + videoData.duration * progress; // neccessary working in Safari
+            videoElem.addEventListener('loadedmetadata', function loadedHandler () { // necessary for working in IE
+                videoElem.currentTime = progress * videoElem.duration;
+                videoElem.removeEventListener('loadedmetadata', loadedHandler);
+            });
             videoElem.load();
             videoElem.play();
         } else {
@@ -287,12 +291,11 @@
     }
 
     function setQuality (quality, initial) {
-        if (initial) {
-            videoElem.src = videoData.files['mp4_' + quality];
-        } else {
-            videoElem.src = videoData.files['mp4_' + quality] + '#t=' + videoElem.currentTime;
-            videoElem.load();
-            videoElem.play();
+        var curTime = videoElem.currentTime;
+        videoElem.src = videoData.files['mp4_' + quality];
+        if (!initial) {
+            var progress = curTime / videoData.duration;
+            seekTo(progress);
         }
 
         controls.quality.value.textContent = quality;
