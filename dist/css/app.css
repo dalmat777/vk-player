@@ -474,10 +474,8 @@ a:hover {
   font-size: 0.85em;
   color: #ddd;
 }
-@media all and (max-width: 400px) {
-  .player-info__author {
-    display: none;
-  }
+.player_min .player-info__author {
+  display: none;
 }
 .player_playing .player-info {
   top: -50px;
@@ -600,6 +598,9 @@ a:hover {
   vertical-align: middle;
   width: 200px;
   padding: 0 15px 0 5px;
+}
+.player_min .player-controls__volumebar {
+  display: none;
 }
 .player-controls__state-pause {
   display: none;
@@ -804,11 +805,8 @@ a:hover {
   background: #222;
   color: #fff;
 }
-@media all and (max-width: 400px) {
-  .player-controls__volumebar,
-  #watch-on-vk {
-    display: none;
-  }
+.player_min #watch-on-vk {
+  display: none;
 }
 .suggestions {
   position: absolute;
@@ -851,6 +849,9 @@ a:hover {
   border: 1px solid #222;
   background: no-repeat center;
   background-size: cover;
+}
+.suggestions__item:hover {
+  text-decoration: none;
 }
 .-columns-1 > .suggestions__item {
   width: 100%;
