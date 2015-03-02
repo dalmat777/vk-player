@@ -263,10 +263,11 @@
             videoElem.load();
             videoElem.play();
             showLoader();
-            listenOnce(videoElem, 'loadedmetadata', function () {
+            listenOnce(videoElem, 'loadeddata', function () {
                 // necessary for working in IE
                 //  because it doesn't support media fragment uri
                 videoElem.currentTime = progress * videoElem.duration;
+                videoElem.play();
                 hideLoader();
             });
         } else {
@@ -371,18 +372,18 @@
         var container = getById('suggestions');
         var list = getById('suggestions-list');
 
-        suggestionsResizeHandler();
+        resizeSuggestions();
 
         container.classList.remove('-hidden');
 
         videoElem.addEventListener('play', hideSuggestions);
-        window.addEventListener('resize', suggestionsResizeHandler);
+        window.addEventListener('resize', resizeSuggestions);
         list.addEventListener('click', listClickHandler);
 
         function hideSuggestions () {
             container.classList.add('-hidden');
             videoElem.removeEventListener('play', hideSuggestions);
-            window.removeEventListener('resize', suggestionsResizeHandler);
+            window.removeEventListener('resize', resizeSuggestions);
             list.removeEventListener('click', listClickHandler);
         }
 
@@ -396,7 +397,7 @@
             loadVideo(item.getAttribute('data-video'), true);
         }
 
-        function suggestionsResizeHandler () {
+        function resizeSuggestions () {
             var width = container.clientWidth;
             var height = container.clientHeight - 95; // 95 padding from top and bottom panels
             var columns;
@@ -527,7 +528,7 @@
         }
     }
 
-    function resizeHandler () { // TODO: keep new position when seeking
+    function resizeHandler () {
         if (state.launched) {
             var duration = videoElem.duration || videoData.duration;
             updateCurTimePosition(videoElem.currentTime / duration);
