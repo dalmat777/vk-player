@@ -39,7 +39,8 @@
     var state = {
         launched: false,
         seeking: false,
-        fiveSecondsPlayed: false
+        fiveSecondsPlayed: false,
+        startFrom: 0
     };
     var hideControlsTimer;
     var videoData;
@@ -112,6 +113,7 @@
         });
 
         state.fiveSecondsPlayed = false;
+        state.startFrom = 0;
         updateCurTimePosition(0);
         styleElem(controls.progress.loaded, {
             left: 0,
@@ -225,8 +227,10 @@
             if (!state.launched) {
                 styleElem(getById('big-play-button'), {display: 'none'});
                 state.launched = true;
-                showLoader();
-                listenOnce(videoElem, 'loadeddata', hideLoader);
+                if (!videoElem.readyState) {
+                    showLoader();
+                    listenOnce(videoElem, 'loadeddata', hideLoader);
+                }
             }
             videoElem.removeAttribute('poster');
             playerElem.classList.add('player_playing');
@@ -262,14 +266,14 @@
             videoElem.src = videoElem.src.split('#')[0] + '#t=' + videoData.duration * progress; // neccessary for working in Safari
             videoElem.load();
             videoElem.play();
-            showLoader();
-            listenOnce(videoElem, 'loadeddata', function () {
+            listenOnce(videoElem, 'loademetaddata', function () {
                 // necessary for working in IE
-                //  because it doesn't support media fragment uri
+                //   because it doesn't support media fragment uri
                 videoElem.currentTime = progress * videoElem.duration;
                 videoElem.play();
-                hideLoader();
+                updateCurTimePosition(progress);
             });
+            state.startFrom = videoData.duration * progress;
         } else {
             videoElem.currentTime = videoElem.duration * progress;
         }
@@ -531,7 +535,7 @@
     function resizeHandler () {
         if (state.launched) {
             var duration = videoElem.duration || videoData.duration;
-            updateCurTimePosition(videoElem.currentTime / duration);
+            updateCurTimePosition(state.startFrom / duration);
         }
         if (playerElem.clientWidth < 400) {
             playerElem.classList.add('player_min');
@@ -565,7 +569,9 @@
     function timeupdateHandler () {
         var duration = videoElem.duration || videoData.duration;
 
-        if (!state.seeking) {
+        if (!videoElem.readyState) {
+            updateCurTimePosition(state.startFrom / duration);
+        } else if (!state.seeking) {
             updateCurTimePosition(videoElem.currentTime / duration);
         }
 
