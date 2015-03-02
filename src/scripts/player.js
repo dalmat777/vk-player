@@ -266,7 +266,7 @@
             videoElem.src = videoElem.src.split('#')[0] + '#t=' + videoData.duration * progress; // neccessary for working in Safari
             videoElem.load();
             videoElem.play();
-            listenOnce(videoElem, 'loademetaddata', function () {
+            listenOnce(videoElem, 'loadedmetadata', function () {
                 // necessary for working in IE
                 //   because it doesn't support media fragment uri
                 videoElem.currentTime = progress * videoElem.duration;
