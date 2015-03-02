@@ -203,7 +203,7 @@
         });
 
         controls.watchOnVk.addEventListener('click', function () {
-            var url = 'http://vk.com/video' + videoData.owner_id + '_' + videoData.id;
+            var url = 'https://vk.com/video' + videoData.owner_id + '_' + videoData.id;
             window.open(url, '_blank');
         });
 
@@ -681,19 +681,19 @@
     }
 
     function fullscreenAvailable () {
-        return doc.fullscreenEnabled || doc.webkitFullscreenEnabled || doc.mozFullScreenEnabled || doc.msFullscreenEnabled;
+        return doc.fullscreenEnabled || doc.webkitFullscreenEnabled || doc.mozFullScreenEnabled;
     }
 
     function enterFullscreen (elem) {
-        (elem.requestFullscreen || elem.webkitRequestFullscreen || elem.mozRequestFullScreen || elem.msRequestFullscreen).call(elem);
+        (elem.requestFullscreen || elem.webkitRequestFullscreen || elem.mozRequestFullScreen).call(elem);
     }
 
     function exitFullscreen () {
-        (doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen).call(doc);
+        (doc.exitFullscreen || doc.webkitExitFullscreen || doc.mozCancelFullScreen).call(doc);
     }
 
     function isFullscreen () {
-        return !!(doc.fullscreenElement || doc.webkitFullscreenElement || doc.mozFullScreenElement || doc.msFullscreenElement);
+        return !!(doc.fullscreenElement || doc.webkitFullscreenElement || doc.mozFullScreenElement);
     }
 
     function throttle (fn, delay) {
