@@ -417,7 +417,7 @@
 
                 while (rows * columns > 12) {
                     // too many cells. Reduce rows or columns?
-                    if (rows <= columns && width*(3/4) < height) {
+                    if (rows < columns && width*(3/4) < height) {
                         columns--;
                     } else {
                         rows--;
@@ -535,7 +535,8 @@
     function resizeHandler () {
         if (state.launched) {
             var duration = videoElem.duration || videoData.duration;
-            updateCurTimePosition(state.startFrom / duration);
+            var curTime = videoElem.readyState ? videoElem.currentTime : state.startFrom;
+            updateCurTimePosition(curTime / duration);
         }
         if (playerElem.clientWidth < 400) {
             playerElem.classList.add('player_min');
